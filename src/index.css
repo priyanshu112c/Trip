@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', system-ui, sans-serif; background: #FDFCF8; color: #0F0F0E; overflow-x: hidden; }
+::selection { background: #C2A27A; color: white; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F4F1EC; }
+::-webkit-scrollbar-thumb { background: #8A8580; border-radius: 999px; }
+
+/* editorial underline */
+.link-underline { position: relative; }
+.link-underline::after { content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background: currentColor; transition: width .4s cubic-bezier(.4,0,.2,1); }
+.link-underline:hover::after { width:100%; }
+
+/* GSAP perf: promote will-change only during animation via class, avoid global */
+.will-change-transform { will-change: transform, opacity; }
+@media (max-width: 768px){
+  /* reduce parallax cost on mobile — GSAP matchMedia already disables scrub, this is fallback */
+  .will-change-transform { will-change: auto; }
+}
+/* prevent horizontal scroll from GSAP x transforms */
+.overflow-hidden { overflow: hidden; }
